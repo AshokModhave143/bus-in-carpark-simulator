@@ -11,6 +11,7 @@ const CarPark = function (config) {
      * Check if X,Y are inside the car park only
      * @param {INT} x x-coordinate for bus
      * @param {INT} y y-cocordinate for bus
+     * @public
      */
     this.isOutOfCarPark = (x, y)=> {
         if((x > (this._config.startPointX + (this._config.lengthX - 1))) ||
