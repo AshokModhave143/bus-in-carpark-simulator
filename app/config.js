@@ -34,9 +34,11 @@ config.messenger = {
         noNegativeCoordinates: "Error! Coordinates must be positive integers",
         wrongDirection: "Error! Invalid direction. Avaiable directions are: {availableDirections}",
         wrongMove: "Warning! You can not move bus that way, it will fall",
-        busPosition: "bus postion is: {x}, {y}, {f}",
+        busPosition: "Output: {x},{y},{f}",
         unknownCommand: "Error! Command is incorrect or unknown. Available commands: {availableCommands}",
-        welcome: 'Hi There, Begin by placing by placing the bus in car park - PLACE X,Y,F e.g. 0,0,north. or \'q\' to quit'
+        welcome: 'Welcome to Bus in Car park Simulator !!!, {eol}Begin by placing by placing the bus in car park - PLACE X,Y,F e.g. 0,0,north. or \'q\' to quit',
+        fileNotFound: "Error! File \'{fileName}\' not found. Please check path.",
+        fileRead: "Reading commands from file \'{fileName}\'... Please wait..{eol}"
     },
     outSubMsg: {
         availableDirections: config.bus.directions.join(","),

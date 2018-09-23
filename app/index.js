@@ -9,14 +9,17 @@
 const os = require("os"),
     stdin = process.stdin,
     stdout = process.stdout,
+    stderr = process.stderr,
     readline = require("readline"),
     EOL = os.EOL,
     config = require("./config"),
     commandProcessor = require("./commandProcessor"),
     bus = require("./busFactory"),
-    messenger = bus.getMessenger();
+    messenger = bus.getMessenger(),
+    path = require("path"),
+    fs = require("fs");
 
-let argv = null;
+let argv, rl;
 
 stdin.setEncoding("utf-8");
 process.title = "Bus in car park simulator";
@@ -25,17 +28,52 @@ argv = process.argv.slice(2);
 
 //Run when user start input from command promt
 stdin.on("data", (data)=> {
-    console.log("Data = " + data);
     processInput(data);
 });
 
-//Check the arguments if any
+/**
+ * Check if there are any arguments for file input
+ */
 if(argv.length) {
     console.log(argv);
+    //Read file input
+    try {
+        fs.accessSync(argv[0], fs.F_OK | fs.R_OK);
+    } catch(e) {
+        stderr.write(messenger.getMessage({
+            msg: "fileNotFound",
+            fileName: argv[0]
+        }));
+        process.exit();
+    }
+
+    // Read file message
+    stderr.write(messenger.getMessage({
+        msg: "fileRead",
+        fileName: argv[0],
+        eol: EOL
+    }));
+
+    rl = readline.createInterface({
+        input: fs.createReadStream(argv[0]),
+        terminal: false
+    });
+
+    //Event handler. Called when line is read from file
+    rl.on("line", (line) => {
+        stdout.write(line + EOL);
+        processInput(line);
+    });
+
+    //Event handler. Called when all lines read complete. Closes the stream
+    rl.on("close", ()=> {
+        rl.close();
+        process.exit();
+    });
 }
 
 // Process the input from user from CLI
-const processInput = (data)=> {
+const processInput = (data) => {
     console.log(data);
     let result, _data = data.trim();
 
@@ -54,10 +92,18 @@ const processInput = (data)=> {
     }
 };
 
-const app = ()=> {};
+/**
+ * App initialization
+ * @static
+ */
+const app = () => {};
 app.run = ()=> {
-    stdout.write("Welcome to Simulator \n");
+    stdout.write(messenger.getMessage({
+        msg: "welcome",
+        eol: EOL
+    }) + EOL + '> ');
     stdin.resume();
 }
 
+//Module Export
 module.exports = app;
