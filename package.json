@@ -1,0 +1,25 @@
+{
+  "name": "bus-in-carpark-simulator",
+  "version": "1.0.0",
+  "description": "Bus moving in car park simulation operated by robot",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon ./start.js",
+    "test": "jasmine"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AshokModhave143/bus-in-carpark-simulator.git"
+  },
+  "author": "Ashok Modhave",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AshokModhave143/bus-in-carpark-simulator/issues"
+  },
+  "homepage": "https://github.com/AshokModhave143/bus-in-carpark-simulator#readme",
+  "dependencies": {
+    "dotenv": "^6.0.0",
+    "os": "^0.1.1",
+    "readline": "^1.3.0"
+  }
+}
