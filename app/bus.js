@@ -64,7 +64,7 @@ const Bus = function (config, carPark, messenger) {
     this.move = ()=> {
         // check if bus is placed in park before this command
         if(!this._isFirstStepMade) {
-            throw new Error(this._messenger.getMessage({
+            return new Error(this._messenger.getMessage({
                 msg: "noInitialCommand"
             }));
         }
@@ -99,13 +99,46 @@ const Bus = function (config, carPark, messenger) {
         return this;
     };
 
-    // right
+    /**
+     * Turn bus face to right. Return error if no inital place for bus is made 
+     * else return current Bus instance
+     * @returns {Error|Bus} 
+     * @public
+     */
     this.right = ()=> {
-        
-    };
-    // left
-    this.left = ()=> {
+        //check if initial PLACE command is made
+        if(!this._isFirstStepMade) {
+            return new Error(this._messenger.getMessage({
+                msg: "noInitialCommand"
+            }))
+        }
 
+        //Set face to right
+        this._currentPosition.f = (this._currentPosition.f + 1) > 3 ? 0 : this._currentPosition + 1;
+        
+        //return current Bus object
+        return this;
+    };
+
+    /**
+     * Turn bus face left. Returns error if no inital Place made 
+     * else returns current Bus instance
+     * @returns {Error|Bus} 
+     * @public
+     */
+    this.left = ()=> {
+        //check if initial place has done
+        if(!this._isFirstStepMade) {
+            return new Error(this._messenger.getMessage({
+                msg: "noInitialCommand"
+            }));
+        }
+
+        // Set Bus face to left
+        this._currentPosition.f = (this._currentPosition.f - 1) < 0 ? 3 : this._currentPosition.f - 1;
+
+        //return current Bus instance
+        return this;
     };
     //report
     this.report = (msgObj) => {
