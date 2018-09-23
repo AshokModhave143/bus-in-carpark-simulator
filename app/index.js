@@ -13,7 +13,9 @@ const os = require("os"),
     EOL = os.EOL,
     config = require("./config"),
     commandProcessor = require("./commandProcessor"),
-    bus = null;
+    bus = require("./busFactory"),
+    messenger = bus.getMessenger();
+
 let argv = null;
 
 stdin.setEncoding("utf-8");
@@ -34,14 +36,15 @@ if(argv.length) {
 
 // Process the input from user from CLI
 const processInput = (data)=> {
+    console.log(data);
     let result, _data = data.trim();
 
     if(_data.match(/(q|quit|exit)/i)) {
         process.exit();
     }
 
-    result = commandProcessor.processRequest(bus, _data);
-    console.log(bus);
+    result = commandProcessor.processRequest( _data, bus, messenger);
+    //console.log(bus);
     if(result instanceof Error) {
         stdout.write(result.message + os.EOL + '> ');
     } else if(typeof result == 'string') {
@@ -50,6 +53,7 @@ const processInput = (data)=> {
         stdout.write('> ');
     }
 };
+
 const app = ()=> {};
 app.run = ()=> {
     stdout.write("Welcome to Simulator \n");
