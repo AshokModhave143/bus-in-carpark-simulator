@@ -4,8 +4,8 @@
  * The Bus class dependencies are CarPark and Messenger instance
  * 
  * @param {object} config configuration of Bus
- * @param {object} carPark Car park instance
- * @param {object} messenger messenger instance
+ * @param {CarPark} carPark Car park instance
+ * @param {Messenger} messenger messenger instance
  */
 const Bus = function (config, carPark, messenger) {
     this._config = config;

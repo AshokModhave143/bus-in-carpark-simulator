@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Testing Messenger
+ * Testing Messenger class
  */
 const config = require("../app/config");
 const Messenger = require("../app/messenger");

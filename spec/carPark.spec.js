@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Testing Bus position on carPark
+ * Testing carPark class
  */
 const config = require("../app/config");
 const CarPark = require("../app/carPark");
@@ -28,7 +28,6 @@ describe('CarPark', () => {
             expect(carPark.isOutOfCarPark(x, y)).toBe(false);
         });
     }
-
 
     const loopInvalidX = (x, y) => {
         it('shoud return invalid = TRUE if X coordinate is OUTSIDE carPark', () => {

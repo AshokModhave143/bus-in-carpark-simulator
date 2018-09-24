@@ -9,7 +9,7 @@ var Messenger = require("../app/messenger");
 var config = require("../app/config");
 var Bus = require("../app/bus");
 
-describe('Bus Simmulator', function() {
+describe('Bus in car park Simulator', function() {
     let bus, 
         carPark, 
         messenger, 
@@ -21,9 +21,7 @@ describe('Bus Simmulator', function() {
     });
 
     beforeEach(() => {
-        bus = new Bus(config.bus,
-            new CarPark(config.carPark),
-            messenger);
+        bus = new Bus(config.bus, new CarPark(config.carPark), messenger);
     });
 
     it('coordinates should be undefined at start', () => {
