@@ -4,8 +4,9 @@
   "description": "Bus moving in car park simulation operated by robot",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon ./start.js",
-    "test": "jasmine"
+    "start": "node ./start.js",
+    "test": "jasmine",
+    "start-file": "node ./start.js $file"
   },
   "repository": {
     "type": "git",
