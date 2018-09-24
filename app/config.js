@@ -1,22 +1,31 @@
 'use strict';
 /**
  * This module defines the constants for Bus in car park simulator
+ * - Bus constants, CarPark constants, messenger constants
  */
 
 /**
  * Import dependencies and initialize variables
  */
 const path = require("path");
+const env = require("dotenv").config();
+
+const {
+    CarParkStartPointX,
+    CarParkStartPointY, 
+    CarParkLengthX, 
+    CarParkLengthY
+} = env.parsed;
 
 let config = {};
 config.app = {
     root: path.resolve(__dirname)
 },
 config.carPark = {
-    startPointX: 0,
-    startPointY: 0,
-    lengthX: 5,
-    lengthY: 5
+    startPointX: CarParkStartPointX || 0,
+    startPointY: CarParkStartPointY || 0,
+    lengthX: CarParkLengthX || 5,
+    lengthY: CarParkLengthY || 5
 },
 config.bus = {
     commands: ['PLACE', 'MOVE', 'LEFT', 'RIGHT', 'REPORT'],
